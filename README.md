@@ -28,6 +28,11 @@ The configure your app to use the new `SmartCookieStore`:
 
     ActionController::Base.session_store = :smart_cookie_store
 
+Compatibility
+=============
+
+This is an initial release that was only tested on Rails 2.3.5!
+
 To Do
 =====
 
