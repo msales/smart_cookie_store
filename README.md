@@ -20,10 +20,23 @@ session is not empty.
 Usage
 =====
 
+Install as a gem:
+-----------------
+
+    gem install smart_cookie_store
+
+And add it to your `config/environment.rb`:
+
+    config.gem "smart_cookie_store"
+
 Install as a plugin:
+--------------------
 
     script/plugin install git://github.com/msales/smart_cookie_store.git
-    
+
+Configuration
+-------------
+
 The configure your app to use the new `SmartCookieStore`:
 
     ActionController::Base.session_store = :smart_cookie_store
