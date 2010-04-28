@@ -11,7 +11,7 @@ PKG_FILES = FileList[
 
 spec = Gem::Specification.new do |s|
   s.name = "smart_cookie_store"
-  s.version = "0.0.1"
+  s.version = "0.0.2"
   s.author = "Urban Hafner"
   s.email = "urban@bettong.net"
   s.homepage = "http://github.com/msales/smart_cookie_store"
