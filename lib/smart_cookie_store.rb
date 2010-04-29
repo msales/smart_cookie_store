@@ -16,7 +16,7 @@ class SmartCookieStore < ActionController::Session::CookieStore
       cookie = Hash.new
 
       session_keys = session_data.keys.reject {|k| k == :session_id }
-      unless session_keys.empty? || session_keys.all? {|k| session_data[k].blank?}
+      if !session_keys.empty? && session_keys.any? {|k| session_data[k].present?}
         marshaled_session_data = marshal(session_data.to_hash)
 
         raise CookieOverflow if marshaled_session_data.size > MAX
@@ -25,12 +25,12 @@ class SmartCookieStore < ActionController::Session::CookieStore
         unless options[:expire_after].nil?
           cookie[:expires] = Time.now + options[:expire_after]
         end
-      end
-      cookie = build_cookie(@key, cookie.merge(options))
-      unless headers[HTTP_SET_COOKIE].blank?
-        headers[HTTP_SET_COOKIE] << "\n#{cookie}"
-      else
-        headers[HTTP_SET_COOKIE] = cookie
+        cookie = build_cookie(@key, cookie.merge(options))
+        unless headers[HTTP_SET_COOKIE].blank?
+          headers[HTTP_SET_COOKIE] << "\n#{cookie}"
+        else
+          headers[HTTP_SET_COOKIE] = cookie
+        end
       end
     end
 
