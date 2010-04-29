@@ -16,10 +16,7 @@ class SmartCookieStore < ActionController::Session::CookieStore
       cookie = Hash.new
 
       session_keys = session_data.keys.reject {|k| k == :session_id }
-      if session_keys.empty? || session_keys.all? {|k| session_data[k].blank?}
-        cookie[:value]   = ''
-        cookie[:expires] = Time.at(0)
-      else
+      unless session_keys.empty? || session_keys.all? {|k| session_data[k].blank?}
         marshaled_session_data = marshal(session_data.to_hash)
 
         raise CookieOverflow if marshaled_session_data.size > MAX
